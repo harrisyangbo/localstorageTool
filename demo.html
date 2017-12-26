@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/localstorageFn.js"></script>
+</head>
+<body>
+    name:<input id="names" type="text" value="" /><br>
+    age:<input id="ages" type="text" value="" /><br>
+    address:<input id="address" type="text" value="" /><br>
+    <button id="setinfo">存值</button><br>
+    <button id="getinfo">取值</button><br>
+    <button id="clear">清空本地存储</button>
+</body>
+<script>
+    var setinfo = document.getElementById('setinfo');
+    var getinfo = document.getElementById('getinfo');
+    var clear = document.getElementById('clear');
+    setinfo.onclick = function () {
+        var names = document.getElementById('names').value;
+        var ages = document.getElementById('ages').value;
+        var address = document.getElementById('address').value;
+        //调用本地存储（存值）
+        $storage({
+            type:'set',
+            datas:{
+                name:names,
+                age:ages,
+                address:address
+            }
+        }).startStorage(function (data) {
+            console.log(data);
+        });
+    };
+    getinfo.onclick = function () {
+        //调用本地存储(取值)
+        $storage('get').startStorage(function (data) {
+            console.log(data);
+        })
+    };
+    clear.onclick = function () {
+        $storage('clear').startStorage(function (data) {
+            console.log(data);
+        })
+    }
+</script>
+</html>
